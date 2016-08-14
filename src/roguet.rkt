@@ -28,7 +28,8 @@
 
 (terminal-open)
 (terminal-set8 "window: size=32x8")
-(terminal-print8 10 10 "Hello, World")
+(terminal-set8 "font: VeraMoBd.ttf, size=12")
+(terminal-print8 1 1 "Hello, World")
 (terminal-refresh)
 (terminal-read)
 (terminal-close)
