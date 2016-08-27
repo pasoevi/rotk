@@ -1,4 +1,4 @@
-#lang racket
+#lang racket/base
 
 (require ffi/unsafe
          "load.rkt")
@@ -34,25 +34,7 @@
 (terminal-read)
 (terminal-close)
 
-#|
-    terminal_open();
-    terminal_set("window: size=32x8");
-    terminal_set("font: UbuntuMono-R.ttf, size=12");
-    terminal_print("Hello, ωōrlд!"); // UTF-8
-    terminal_refresh();
-    terminal_read();
-    terminal_close();
 
-|#
-
-;int terminal_set8(const int8_t* value);
-;int terminal_set16(const int16_t* value);
-;int terminal_set32(const int32_t* value);
-;void terminal_refresh();
-;void terminal_clear();
-;void terminal_clear_area(int x, int y, int w, int h);
-;void terminal_crop(int x, int y, int w, int h);
-;void terminal_layer(int index);
 ;void terminal_color(color_t color);
 ;void terminal_bkcolor(color_t color);
 ;void terminal_composition(int mode);
