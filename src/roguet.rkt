@@ -1,4 +1,8 @@
-#lang racket/base
+#|
+
+|#
+
+#lang racket
 
 (require ffi/unsafe
          "load.rkt")
@@ -17,49 +21,47 @@
 (defroguet terminal-crop : _int _int _int _int -> _void)
 (defroguet terminal-layer : _int -> _void)
 
+(define _color_t _uint32)
+(defroguet terminal-color : _color_t -> _void)
+(defroguet terminal-bkcolor : _color_t -> _void)
+(defroguet terminal-composition : _int -> _void)
+(defroguet terminal-put : _int _int _int -> _void)
+(defroguet terminal-put-ext : _int _int _int _int _int _pointer -> _void)
+(defroguet terminal-pick : _int _int _int -> _int)
+(defroguet terminal-pick-color : _int _int _int -> _color_t)
+(defroguet terminal-pick-bkcolor : _int _int -> _color_t)
 (defroguet terminal-print8 : _int _int _string -> _int)
 (defroguet terminal-print16 : _int _int _pointer -> _int)
 (defroguet terminal-print32 : _int _int _pointer -> _int)
-;(defroguet terminal-print : _int _int _pointer -> _int)
+;(defroguet terminal-print : _int _int _pointer -> _int) ; need to be defined as macro
+(defroguet terminal-measure8 : _pointer -> _int)
+(defroguet terminal-measure16 : _pointer -> _int)
+(defroguet terminal-measure32 : _pointer -> _int)
+(defroguet terminal-has-input : -> _int)
+(defroguet terminal-state : _int -> _int)
+(defroguet terminal-read : -> _int)
+(defroguet terminal-read_str8 : _int _int _pointer _int -> _int)
+(defroguet terminal-read_str16 : _int _int _pointer _int -> _int -> _int)
+(defroguet terminal-read_str32 : _int _int _pointer _int -> _int -> _int)
+(defroguet terminal-peek : -> _int)
+(defroguet terminal-delay : _int -> _void)
+(defroguet terminal-get8 : _pointer _pointer -> _pointer)
+(defroguet terminal-get16 : _pointer _pointer -> _pointer)
+(defroguet terminal-get32 : _pointer _pointer -> _pointer)
 
-(defroguet terminal-read : -> _void)
+;color_t color_from_name8(const int8_t* name);
+;color_t color_from_name16(const int16_t* name);
+;color_t color_from_name32(const int32_t* name);
 
 ;; Test
 
 (terminal-open)
-(terminal-set8 "window: size=32x8")
+(terminal-set8 "window: size=80x30")
 (terminal-set8 "font: VeraMoBd.ttf, size=12")
-(terminal-print8 1 1 "Hello, World")
+(terminal-print8 1 1 "Гамарджоба, ωōrlд!")
 (terminal-refresh)
-(terminal-read)
+(terminal-delay 100) ; delay for 1/10 second
+;(terminal-read) ; block until input is received. 
 (terminal-close)
 
 
-;void terminal_color(color_t color);
-;void terminal_bkcolor(color_t color);
-;void terminal_composition(int mode);
-;void terminal_put(int x, int y, int code);
-;void terminal_put_ext(int x, int y, int dx, int dy, int code, color_t* corners);
-;int terminal_pick(int x, int y, int index);
-;color_t terminal_pick_color(int x, int y, int index);
-;color_t terminal_pick_bkcolor(int x, int y);
-;int terminal_print8(int x, int y, const int8_t* s);
-;int terminal_print16(int x, int y, const int16_t* s);
-;int terminal_print32(int x, int y, const int32_t* s);
-;int terminal_measure8(const int8_t* s);
-;int terminal_measure16(const int16_t* s);
-;int terminal_measure32(const int32_t* s);
-;int terminal_has_input();
-;int terminal_state(int code);
-;int terminal_read();
-;int terminal_read_str8(int x, int y, int8_t* buffer, int max);
-;int terminal_read_str16(int x, int y, int16_t* buffer, int max);
-;int terminal_read_str32(int x, int y, int32_t* buffer, int max);
-;int terminal_peek();
-;void terminal_delay(int period);
-;const int8_t* terminal_get8(const int8_t* key, const int8_t* default_);
-;const int16_t* terminal_get16(const int16_t* key, const int16_t* default_);
-;const int32_t* terminal_get32(const int32_t* key, const int32_t* default_);
-;color_t color_from_name8(const int8_t* name);
-;color_t color_from_name16(const int16_t* name);
-;color_t color_from_name32(const int32_t* name);
