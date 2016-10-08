@@ -53,15 +53,3 @@
 ;color_t color_from_name16(const int16_t* name);
 ;color_t color_from_name32(const int32_t* name);
 
-;; Test
-
-(terminal-open)
-(terminal-set8 "window: size=80x30")
-(terminal-set8 "font: VeraMoBd.ttf, size=12")
-(terminal-print8 1 1 "Гамарджоба, ωōrlд!")
-(terminal-refresh)
-(terminal-delay 100) ; delay for 1/10 second
-;(terminal-read) ; block until input is received. 
-(terminal-close)
-
-
